@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+
+<h1>Press the buttons to move the Gantry System</h1>
+{% if configData %}
+<table>
+    {% for key, value in configData["Gantry_Positions"].iteritems() %}
+       <tr>
+            <th> {{ key }} </th>
+            <td> {{ value }} </td>
+       </tr>
+    {% endfor %}
+    {% for key, value in configData["Item_Names"].iteritems() %}
+       <tr>
+            <th> {{ key }} </th>
+            <td> {{ value }} </td>
+       </tr>
+    {% endfor %}
+    </table>
+
+{% endif%}
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type=text/javascript>
+    $(function() {
+      var pins = JSON.parse('{{Gantry_Pins | tojson | safe}}')
+      var configData = JSON.parse('{{configData | tojson | safe}}')
+
+      $('#Up').click(function (e) { 
+	$('#Up').attr("disabled", true);
+	$('#Down').attr("disabled", true);
+	$('#Left').attr("disabled", true);
+	$('#Right').attr("disabled", true);
+        $.ajax({
+          contentType: 'application/json;charset=UTF-8',
+          type: "POST",
+          url: "MoveUp",
+          data: JSON.stringify(pins),
+          success: function (response) {
+            console.log(response);
+          },
+	  complete: function(){
+	    $('#Up').attr("disabled", false);
+	    $('#Down').attr("disabled", false);
+	    $('#Left').attr("disabled", false);
+	    $('#Right').attr("disabled", false);
+	  }
+        });
+
+
+      });
+
+      $('#Down').click(function (e) { 
+	$('#Up').attr("disabled", true);
+        $('#Down').attr("disabled", true);
+        $('#Left').attr("disabled", true);
+        $('#Right').attr("disabled", true);
+        $.ajax({
+          contentType: 'application/json;charset=UTF-8',
+          type: "POST",
+          url: "MoveDown",
+          data: (Number(document.getElementById('VerticalMotor').value) == 0 ) ? JSON.stringify(0) : JSON.stringify(pins),
+          success: function (response) {
+            MoveDown(document.getElementById('VerticalMotor'))
+            console.log(response);
+          },
+          complete: function(){
+            $('#Up').attr("disabled", false);
+	    $('#Down').attr("disabled", false);
+            $('#Left').attr("disabled", false);
+            $('#Right').attr("disabled", false);
+          }
+        });
+      });
+
+      $('#Left').click(function (e) {
+	$('#Up').attr("disabled", true);
+        $('#Down').attr("disabled", true);
+        $('#Left').attr("disabled", true);
+        $('#Right').attr("disabled", true);
+        $.ajax({
+          contentType: 'application/json;charset=UTF-8',
+          type: "POST",
+          url: "MoveLeft",
+          data: (Number(document.getElementById('HorizontalMotor').value) == 0 ) ? JSON.stringify(0) : JSON.stringify(pins),
+          success: function (response) {
+            MoveLeft(document.getElementById('HorizontalMotor'))
+            console.log(response);
+          },
+          complete: function(){
+            $('#Up').attr("disabled", false);
+	    $('#Down').attr("disabled", false);
+            $('#Left').attr("disabled", false);
+            $('#Right').attr("disabled", false);
+          }
+        });
+      });
+
+      $('#Right').click(function (e) {
+	$('#Up').attr("disabled", true);
+        $('#Down').attr("disabled", true);
+        $('#Left').attr("disabled", true);
+        $('#Right').attr("disabled", true); 
+        $.ajax({
+          contentType: 'application/json;charset=UTF-8',
+          type: "POST",
+          url: "MoveRight",
+          data: JSON.stringify(pins),
+          success: function (response) {
+            console.log(response);
+          },
+          complete: function(){
+            $('#Up').attr("disabled", false);
+	    $('#Down').attr("disabled", false);
+            $('#Left').attr("disabled", false);
+            $('#Right').attr("disabled", false);
+          }
+        });
+      });
+
+    });
+
+</script>
+
+<Script>
+
+    function MoveUp(id){
+        var val = Number(id.value) + 1
+        id.value = val
+    }
+    function MoveDown(id){
+        var val = Number(id.value)
+        if(val > 0){
+            id.value = val - 1
+        }
+    }
+    function MoveRight(id){
+        var val = Number(id.value) + 1
+        id.value = val
+    }
+    function MoveLeft(id){
+        var val = Number(id.value)
+        if(val > 0){
+            id.value = val - 1
+        }
+    }
+
+</Script>
+
+        <button id=Up onclick="MoveUp(document.getElementById('VerticalMotor'))" >Up</button>
+        <button id=Down >Down</button>
+        <button id=Right onclick="MoveRight(document.getElementById('HorizontalMotor'))" >Right</button>
+        <button id=Left >Left</button>        
+
+        <form method="POST" action="/SetPins">
+          <label>Current Vertical Motor Position</label>
+          <input type="number" id="VerticalMotor" name="VerticalMotor" value=0 readonly><br><br>
+          <label> Current Horizontal Motor Position</label>
+          <input type="number" id="HorizontalMotor" name="HorizontalMotor" value=0 readonly><br><br>
+          <label for="Position">Choose a Position:</label>
+          <select name="Position" id="Position">
+            {% for key, value in configData["Gantry_Positions"].iteritems() %}
+                <option value={{ key }}>{{ key }}</option>
+            {% endfor %}
+          </select>
+          <button id=SetPins name="SetPins" >Set Positions New Coordinates</button>
+        </form>
+        <form method="GET", action="/home">
+          <button>Return to Homepage</button>
+        </form>
+
+
+</html>

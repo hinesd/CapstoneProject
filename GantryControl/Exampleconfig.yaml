@@ -1,0 +1,46 @@
+Gantry_Control_Pins:
+  HorizontalMotor:
+    Dir_Pin: 4
+    ENA_Pin: 23
+    PUL_Pin: 14
+  VerticalMotor:
+    Dir_Pin: 2
+    ENA_Pin: 24
+    PUL_Pin: 3
+Gantry_Positions:
+  position1:
+    HorizontalMotor_SFH: 3
+    VerticalMotor_SFH: 20
+  position2:
+    HorizontalMotor_SFH: 8
+    VerticalMotor_SFH: 6
+  position3:
+    HorizontalMotor_SFH: 9
+    VerticalMotor_SFH: 5
+  position4:
+    HorizontalMotor_SFH: 50
+    VerticalMotor_SFH: 25
+Limit_Switch:
+  HMSwitchHome: 18
+  HMSwtichEnd: 27
+  VMSwitchHome: 15
+  VMSwtichEnd: 17
+Lock_Names:
+  lock1: position4
+  lock2: position1
+  lock3: position3
+  lock4: position2
+Pin_On_RPi:
+  pin10: 15
+  pin11: 17
+  pin12: 18
+  pin13: 27
+  pin16: 23
+  pin18: 24
+  pin3: 2
+  pin5: 3
+  pin7: 4
+  pin8: 14
+Variables:
+  Broker_IP: localhost
+  Topic: test/message

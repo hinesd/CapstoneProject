@@ -1,0 +1,44 @@
+Actuator_Pins:
+  Act1_P1: 0
+  Act1_P2: 5
+  Act2_P1: 13
+  Act2_P2: 19
+  PWM1_Pin: 6
+  PWM2_Pin: 26
+  Standby: 11
+Gantry_Control_Pins:
+  HorizontalMotor:
+    Dir_Pin: 27
+    ENA_Pin: 22
+    PUL_Pin: 17
+  VerticalMotor:
+    Dir_Pin: 3
+    ENA_Pin: 4
+    PUL_Pin: 2
+Gantry_Positions:
+  position1:
+    HorizontalMotor_SFH: 0
+    VerticalMotor_SFH: 0
+  position2:
+    HorizontalMotor_SFH: 0
+    VerticalMotor_SFH: 0
+  position3:
+    HorizontalMotor_SFH: 0
+    VerticalMotor_SFH: 0
+  position4:
+    HorizontalMotor_SFH: 0
+    VerticalMotor_SFH: 0
+Limit_Switch:
+  HMSwitchHome: 21
+  HMSwtichEnd: 16
+  VMSwitchHome: 20
+  VMSwtichEnd: 12
+Item_Names:
+  Item1: position1
+  Item2: position2
+  Item3: position3
+  Item4: position4
+Variables:
+  Actuator_Topic: test/actuator
+  Broker_IP: 10.40.97.105
+  Topic: test/message

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+</head>
+
+<form method="POST" action="/Publish">
+        <label for="Message">Message</label><br>
+	<input id="Message" type="text" placeholder="Message" name="Message" required>
+	<label for="Topic">Topic</label><br>
+	<input id="Topic" type="text" placeholder="/Test/Topic" name="Topic" required>	
+	<button type="submit">Submit</button>
+</form>
+</html>

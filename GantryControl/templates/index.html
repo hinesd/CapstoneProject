@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Subscribe Page</title>
+</head>
+
+<h>What position do you want to move to?</h>
+
+
+<form method="POST" action="/Move_To_Position">
+       	<label>Give me a Item name</label><br>
+	<input id="ItemName" type="text" placeholder="Item1" name="ItemName">	
+	<button type="submit" >Submit</button>
+</form>
+
+<form method="POST"action="/Update_Positions">
+	<button type="submit" >click here to update position coordinates</button>
+</form>
+<form action="/Find_Home">
+	<button type="submit" >Reset/Refresh (Go Home, Reloads config file)</button>
+</form>
+
+<form action="/Actuate">
+        <button type="submit" >Simulate Actuator movement</button>
+</form>
+
+<form action="/PinClear">
+	<label>When done with tesing, clear GPIO pins</label>
+	<button type="submit">Clear GPIO Pins</button>
+</form>
+
+
+</html>
